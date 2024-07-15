@@ -12,7 +12,15 @@ class MusicPlayerPage extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: Row(
                 children: [
-                  Icon(Icons.expand_more, color: Colors.white),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.white,
+                    ),
+                  ),
                   Spacer(),
                   Icon(Icons.more_vert, color: Colors.white),
                 ],

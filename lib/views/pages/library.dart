@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:music_app/views/pages/Lliked_songs.dart';
+import 'package:music_app/views/pages/downloads.dart';
+import 'package:music_app/views/pages/playing.dart';
 
 class LibraryPage extends StatelessWidget {
   final List<Map<String, String>> recentlyPlayed = [
@@ -42,31 +45,74 @@ class LibraryPage extends StatelessWidget {
                     physics: NeverScrollableScrollPhysics(),
                     children: [
                       _buildLibraryItem(
-                          Icons.favorite, 'Liked Songs', '120 songs'),
+                          Icons.favorite, 'Liked Songs', '120 songs', () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => LikedSongsPage(),
+                            ));
+                      }),
                       _buildLibraryItem(
-                          Icons.download, 'Downloads', '210 songs'),
+                        Icons.download,
+                        'Downloads',
+                        '210 songs',
+                        () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DownloadsPage(),
+                              ));
+                        },
+                      ),
                       _buildLibraryItem(
-                          Icons.playlist_play, 'Playlists', '12 playlists'),
-                      _buildLibraryItem(Icons.person, 'Artists', '3 artists'),
+                        Icons.playlist_play, 'Playlists',
+                          '12 playlists', () {}),
+                      _buildLibraryItem(
+                        Icons.person,
+                        'Artists',
+                        '3 artists',
+                        () {},
+                      ),
                     ],
                   ),
                   SizedBox(height: 16),
                   Text('Recently Played',
                       style: TextStyle(color: Colors.white, fontSize: 18)),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: recentlyPlayed.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        leading: Icon(Icons.music_note, color: Colors.white),
-                        title: Text(recentlyPlayed[index]["title"]!,
-                            style: TextStyle(color: Colors.white)),
-                        subtitle: Text(recentlyPlayed[index]["subtitle"]!,
-                            style: TextStyle(color: Colors.grey)),
-                        trailing: Icon(Icons.more_vert, color: Colors.white),
-                      );
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MusicPlayerPage(),
+                          ));
                     },
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: recentlyPlayed.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          leading: Icon(
+                            Icons.music_note,
+                            color: Colors.white,
+                          ),
+                          title: Text(
+                            recentlyPlayed[index]["title"]!,
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          subtitle: Text(
+                            recentlyPlayed[index]["subtitle"]!,
+                            style: TextStyle(
+                              color: Colors.grey,
+                            ),
+                          ),
+                          trailing: Icon(
+                            Icons.more_vert,
+                            color: Colors.white,
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),
@@ -77,22 +123,45 @@ class LibraryPage extends StatelessWidget {
     );
   }
 
-  Widget _buildLibraryItem(IconData icon, String title, String subtitle) {
-    return Container(
-      padding: EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        color: Colors.grey[850],
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(icon, color: Colors.white, size: 40),
-          SizedBox(height: 8),
-          Text(title, style: TextStyle(color: Colors.white, fontSize: 16)),
-          SizedBox(height: 4),
-          Text(subtitle, style: TextStyle(color: Colors.grey)),
-        ],
+  Widget _buildLibraryItem(
+    IconData icon,
+    String title,
+    String subtitle,
+    final onTap,
+  ) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color: Colors.grey[850],
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(
+              icon,
+              color: Colors.white,
+              size: 40,
+            ),
+            SizedBox(height: 8),
+            Text(
+              title,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+              ),
+            ),
+            SizedBox(height: 4),
+            Text(
+              subtitle,
+              style: TextStyle(
+                color: Colors.grey,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:music_app/views/pages/playing.dart';
 
 class LikedSongsPage extends StatelessWidget {
   final List<Map<String, String>> likedSongs = [
@@ -24,7 +25,7 @@ class LikedSongsPage extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            // Handle back navigation
+            Navigator.pop(context);
           },
         ),
       ),
@@ -43,24 +44,33 @@ class LikedSongsPage extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: ListView.builder(
-              itemCount: likedSongs.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  leading: CircleAvatar(
-                    backgroundImage:
-                        NetworkImage('https://picsum.photos/50?random=$index'),
-                  ),
-                  title: Text(likedSongs[index]['title']!),
-                  subtitle: Text(likedSongs[index]['artist']!),
-                  trailing: IconButton(
-                    icon: Icon(Icons.more_vert),
-                    onPressed: () {
-                      // Handle more options
-                    },
-                  ),
-                );
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MusicPlayerPage(),
+                    ));
               },
+              child: ListView.builder(
+                itemCount: likedSongs.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    leading: CircleAvatar(
+                      backgroundImage: NetworkImage(
+                          'https://picsum.photos/50?random=$index'),
+                    ),
+                    title: Text(likedSongs[index]['title']!),
+                    subtitle: Text(likedSongs[index]['artist']!),
+                    trailing: IconButton(
+                      icon: Icon(Icons.more_vert),
+                      onPressed: () {
+                        // Handle more options
+                      },
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         ],

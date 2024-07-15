@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:music_app/views/pages/playing.dart';
+import 'package:music_app/views/pages/settings.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -19,9 +21,18 @@ class HomePage extends StatelessWidget {
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     Spacer(),
-                    CircleAvatar(
-                      backgroundImage: NetworkImage(
-                          'https://randomuser.me/api/portraits/men/32.jpg'),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SettingsPage(),
+                            ));
+                      },
+                      child: CircleAvatar(
+                        backgroundImage: NetworkImage(
+                            'https://randomuser.me/api/portraits/men/32.jpg'),
+                      ),
                     ),
                   ],
                 ),
@@ -116,14 +127,6 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.library_music), label: 'Your Library'),
-        ],
-      ),
     );
   }
 }
@@ -136,17 +139,26 @@ class FeatureCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(right: 8),
-      width: 140,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Image.network(imageUrl, width: 140, height: 100, fit: BoxFit.cover),
-          SizedBox(height: 8),
-          Text(title,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-        ],
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => MusicPlayerPage(),
+            ));
+      },
+      child: Container(
+        margin: EdgeInsets.only(right: 8),
+        width: 140,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Image.network(imageUrl, width: 140, height: 100, fit: BoxFit.cover),
+            SizedBox(height: 8),
+            Text(title,
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          ],
+        ),
       ),
     );
   }
@@ -162,18 +174,27 @@ class RecentlyPlayedCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(right: 8),
-      width: 120,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Image.network(imageUrl, width: 120, height: 80, fit: BoxFit.cover),
-          SizedBox(height: 8),
-          Text(title,
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
-          Text(artist, style: TextStyle(fontSize: 12, color: Colors.grey)),
-        ],
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => MusicPlayerPage(),
+            ));
+      },
+      child: Container(
+        margin: EdgeInsets.only(right: 8),
+        width: 120,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Image.network(imageUrl, width: 120, height: 80, fit: BoxFit.cover),
+            SizedBox(height: 8),
+            Text(title,
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+            Text(artist, style: TextStyle(fontSize: 12, color: Colors.grey)),
+          ],
+        ),
       ),
     );
   }

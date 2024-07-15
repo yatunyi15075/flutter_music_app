@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:music_app/views/pages/playing.dart';
 
 class SearchPage extends StatelessWidget {
   final List<Map<String, String>> recentSearches = [
@@ -28,22 +29,31 @@ class SearchPage extends StatelessWidget {
       body: Stack(
         children: [
           // Recent searches list
-          ListView.builder(
-            itemCount: recentSearches.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                leading: Icon(Icons.music_note, color: Colors.white),
-                title: Text(
-                  recentSearches[index]["title"]!,
-                  style: TextStyle(color: Colors.white),
-                ),
-                subtitle: Text(
-                  recentSearches[index]["subtitle"]!,
-                  style: TextStyle(color: Colors.grey),
-                ),
-                trailing: Icon(Icons.clear, color: Colors.white),
-              );
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MusicPlayerPage(),
+                  ));
             },
+            child: ListView.builder(
+              itemCount: recentSearches.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  leading: Icon(Icons.music_note, color: Colors.white),
+                  title: Text(
+                    recentSearches[index]["title"]!,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  subtitle: Text(
+                    recentSearches[index]["subtitle"]!,
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                  trailing: Icon(Icons.clear, color: Colors.white),
+                );
+              },
+            ),
           ),
           // Clear history button
           Positioned(

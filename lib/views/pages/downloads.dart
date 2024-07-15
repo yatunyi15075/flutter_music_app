@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:music_app/views/pages/playing.dart';
 
 class DownloadsPage extends StatelessWidget {
   final List<Map<String, String>> downloadedSongs = [
@@ -25,7 +26,7 @@ class DownloadsPage extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            // Handle back navigation
+            Navigator.pop(context);
           },
         ),
       ),
@@ -61,18 +62,27 @@ class DownloadsPage extends StatelessWidget {
             child: ListView.builder(
               itemCount: downloadedSongs.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  leading: CircleAvatar(
-                    backgroundImage:
-                        NetworkImage('https://picsum.photos/50?random=$index'),
-                  ),
-                  title: Text(downloadedSongs[index]['title']!),
-                  subtitle: Text(downloadedSongs[index]['artist']!),
-                  trailing: IconButton(
-                    icon: Icon(Icons.more_vert),
-                    onPressed: () {
-                      // Handle more options
-                    },
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MusicPlayerPage(),
+                        ));
+                  },
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      backgroundImage: NetworkImage(
+                          'https://picsum.photos/50?random=$index'),
+                    ),
+                    title: Text(downloadedSongs[index]['title']!),
+                    subtitle: Text(downloadedSongs[index]['artist']!),
+                    trailing: IconButton(
+                      icon: Icon(Icons.more_vert),
+                      onPressed: () {
+                        // Handle more options
+                      },
+                    ),
                   ),
                 );
               },

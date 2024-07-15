@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:music_app/views/pages/playing.dart';
+import 'package:music_app/views/pages/theme_selection.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -83,7 +85,11 @@ class _SettingsPageState extends State<SettingsPage> {
           ListTile(
             title: Text('Change theme', style: TextStyle(color: Colors.white)),
             onTap: () {
-              // Handle theme change
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ThemeSelectionPage(),
+                  ));
             },
           ),
           SizedBox(height: 20),
@@ -99,14 +105,6 @@ class _SettingsPageState extends State<SettingsPage> {
             trailing: Icon(Icons.arrow_forward_ios, color: Colors.white),
             onTap: () {
               // Navigate to Help & Support
-            },
-          ),
-          Divider(color: Colors.grey),
-          ListTile(
-            title: Text('Logout', style: TextStyle(color: Colors.white)),
-            trailing: Icon(Icons.arrow_forward_ios, color: Colors.white),
-            onTap: () {
-              // Handle logout
             },
           ),
           Divider(color: Colors.grey),
