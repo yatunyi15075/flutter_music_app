@@ -1,6 +1,6 @@
 # music_app
 Flutter Music App
-Welcome to our Flutter Music App project, assigned by our internship organization, MySopnet.
+Welcome to our Flutter Music App project, assigned by our internship organization, MasyopNet.
 
 Overview
 Our project aims to create a music player application using Flutter, a technology for building beautiful native applications for mobile, web, and desktop from a single codebase. This app will allow users to listen to their favorite music, create playlists, and explore new songs.
